@@ -1,0 +1,32 @@
+{
+        "compilerOptions": {
+        "baseUrl": ".",
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitReturns": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": false,
+        "module": "es2020",
+        "moduleResolution": "node",
+        "target": "es5",
+        "lib": ["dom", "es5", "es2020"],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strictPropertyInitialization": false,
+        "allowJs": true
+    },
+    "include": [
+        "resources/views/app/**/*.ts",
+        "resources/views/app/**/*.vue"
+    ],
+    "exclude": ["node_modules","resources/assets/**/*"],
+   // "exclude": ["node_modules", "resources/views/app/modules/client/**/*"],
+    "paths": {
+        "@app/*": ["resources/views/app/*"],
+        "@modules/*": ["resources/views/modules/*"],
+        "@core/*": ["resources/views/app/core/*"],
+        "@shared/*": ["./resources/views/app/shared/*"],
+        "@services/*": ["resources/views/app/core/services/*"],
+        "@models/*": ["resources/views/app/shared/models/*"]
+    }
+}

@@ -1,0 +1,108 @@
+.cart-button {
+    .fa-shopping-cart {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: -20%;
+        font-size: 1.8em;
+        transform: translate(-50%, -50%);
+    }
+
+    .fa-square {
+        position: absolute;
+        z-index: 1;
+        top: -20%;
+        left: 53%;
+        font-size: 0.8em;
+        transform: translate(-50%, -50%);
+    }
+    
+    span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        color: #fff;
+        transform: translate(-50%, -50%);
+        &:hover {
+            color: #70c745;
+        }
+
+        &.added {
+            opacity: 0;
+        }
+    }
+
+    &.clicked {
+        .fa-shopping-cart {
+            animation: cart 2s ease-in forwards;
+        }
+
+        .fa-square {
+            animation: box 2s ease-in forwards;
+        }
+        span {
+            &.add-to-cart {
+                animation: addcart 2s ease-in forwards;
+            }
+
+            &.added {
+                animation: added 2s ease-in forwards;
+            }
+        }
+    }
+}
+
+@keyframes cart {
+    0% {
+        left: -10%;
+    }
+
+    40%,
+    60% {
+        left: 50%;
+    }
+
+    100% {
+        left: 110%;
+    }
+}
+
+@keyframes box {
+    0%,
+    40% {
+        top: -20%;
+    }
+
+    60% {
+        top: 36%;
+        left: 53%;
+    }
+
+    100% {
+        top: 40%;
+        left: 112%;
+    }
+}
+
+@keyframes addcart {
+    0%,
+    30% {
+        opacity: 1;
+    }
+
+    30%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes added {
+    0%,
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
