@@ -29,4 +29,8 @@ class Carrier extends Model
     public function image(){
         return $this->belongsTo('App\Models\Storage','image_id');
     }
+
+    public function shipping(){
+        return $this->hasMany('App\Models\Shipping','carrier_id');
+    }
 }

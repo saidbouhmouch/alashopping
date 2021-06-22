@@ -238,6 +238,29 @@ export default new Router({
                             component: () => import("./pages/specific-prices/update/update.page.vue")
                         }
                     ]
+                },
+                {
+                    path: "/admin/shipping",
+                    redirect: "/admin/shipping/list",
+                    name: "shipping",
+                    component: () => import("./pages/shipping/shipping.page.vue"),
+                    children: [
+                        {
+                            path: "/admin/shipping/list",
+                            name: "shippingList",
+                            component: () => import("./pages/shipping/list/list.page.vue")
+                        }
+                        , {
+                            path: "/admin/shipping/create",
+                            name: "shippingCreate",
+                            component: () => import("./pages/shipping/store/store.page.vue")
+                        }
+                        // , {
+                        //     path: "/admin/shipping/:id/edit",
+                        //     name: "specificPriceUpdate",
+                        //     component: () => import("./pages/shipping/update/update.page.vue")
+                        // }
+                    ]
                 }
             ]
         }

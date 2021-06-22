@@ -57,6 +57,13 @@ export default class SideBarComponent extends Vue {
                     icon: "fa fa-truck",
                     url: { path: '/admin/carriers' },
                     active: false,
+                },
+                {
+                    id: "2",
+                    text: "Shipping",
+                    icon: "fa fa-exchange",
+                    url: { path: '/admin/shipping' },
+                    active: false,
                 }
             ]
 

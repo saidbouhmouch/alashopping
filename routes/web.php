@@ -138,6 +138,16 @@ $router->group(['prefix'=>'api/admin/specific-prices','middleware' => ['csrf','a
     $router->delete('/{id}', 'Admin\SpecificPriceController@destroy');
 });
 
+/**  shipping */
+$router->group(['prefix'=>'api/admin/shipping','middleware' => ['csrf','admin']], function() use($router){
+    $router->get('/', 'Admin\ShippingController@index');
+    $router->post('/', 'Admin\ShippingController@store');
+    $router->get('/{id}', 'Admin\ShippingController@show');
+    $router->get('/{id}/edit', 'Admin\ShippingController@edit');
+    $router->put('/{id}', 'Admin\ShippingController@update');
+    $router->delete('/{id}', 'Admin\ShippingController@destroy');
+});
+
 
 /**  Upload File */
 $router->group(['prefix'=>'upload-file','middleware' => ['csrf']], function() use($router){

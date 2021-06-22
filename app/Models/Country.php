@@ -28,4 +28,9 @@ class Country extends Model
     public function addresse(){
         return $this->hasOne('App\Models\Addresse','country_id');
     } 
+
+    // public function shipping()
+    // {
+    //     return $this->hasMany('App\Models\Shipping','country_id');
+    // }
 }
