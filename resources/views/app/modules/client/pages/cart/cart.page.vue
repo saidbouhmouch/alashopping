@@ -2,9 +2,10 @@
     <div>
         <breadcrumb-area :title="'CART'"></breadcrumb-area>
 
-        <div class="cart-area section-padding-0-100 clearfix tw-relative">
-            <div v-bind:class="{'hidden' : isLoading}" class="tw-absolute tw-top-0 tw-bottom-0 tw-right-0 tw-left-0">
-                              <loading-component :height="96" :width="96" ></loading-component>
+        <div class="cart-area section-padding-0-100 clearfix tw-relative" :class="{'tw-z-10':isShowShoppingModal}">
+            <div v-bind:class="{'hidden' : isLoading}"
+                class="tw-absolute tw-min-h-full tw-top-0 tw-bottom-0 tw-right-0 tw-left-0">
+                <loading-component :height="96" :width="96"></loading-component>
             </div>
             <div class="flex tw-justify-center tw-items-center" v-if="isLoading && products.length == 0">
                 <p class="tw-text-center">Votre panier a été vidé</p>
@@ -27,28 +28,27 @@
                                     <tr v-for="(product,index) in products" :key="index">
                                         <td class="cart_product_img">
                                             <a href="javascript:void(0)">
-                                                <img :src="product.picture.url"
-                                                    alt="Product" /></a>
-                                            <h5 class="tw-flex tw-flex-col"> 
-                                                <div class="flex" 
-                                                v-if="product && product.specificPrice && product.specificPrice.expirationDate">
-                                                <count-down-component
-                                                    :expirationDate="product.specificPrice.expirationDate">
-                                                </count-down-component>
+                                                <img :src="product.picture.url" alt="Product" /></a>
+                                            <h5 class="tw-flex tw-flex-col">
+                                                <div class="flex"
+                                                    v-if="product && product.specificPrice && product.specificPrice.expirationDate">
+                                                    <count-down-component
+                                                        :expirationDate="product.specificPrice.expirationDate">
+                                                    </count-down-component>
                                                 </div>
-                                               <span> {{product.name}} </span>
+                                                <span> {{product.name}} </span>
                                             </h5>
                                         </td>
                                         <td class="qty">
                                             <div class="quantity">
-                                            <span class="qty-minus" @click="qtyMinus($event,product)">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1"
-                                                name="quantity" v-model="product.quantity">
-                                            <span class="qty-plus" @click="qtyplus($event,product)">
-                                                <i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        </div>
+                                                <span class="qty-minus" @click="qtyMinus($event,product)">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                                <input type="number" class="qty-text" id="qty" step="1" min="1"
+                                                    name="quantity" v-model="product.quantity">
+                                                <span class="qty-plus" @click="qtyplus($event,product)">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i></span>
+                                            </div>
                                         </td>
                                         <td class="price">
                                             <p class="tw-flex tw-w-full tw-items-center">
@@ -63,10 +63,12 @@
                                             </p>
                                         </td>
                                         <td class="total_price">
-                                            <span>$ {{ (product.price * product.quantity ) - (product.quantity * product.specificPrice.reducedPrice ) }} </span>
+                                            <span>$ {{ (product.price * product.quantity ) - (product.quantity *
+                                                product.specificPrice.reducedPrice ) }} </span>
                                         </td>
                                         <td class="action">
-                                            <a href="javascript:void(0)" @click="deleteProduct(product)"><i class="icon_close"></i></a>
+                                            <a href="javascript:void(0)" @click="deleteProduct(product)"><i
+                                                    class="icon_close"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -103,16 +105,32 @@
                                 <h5>${{subTotal}}</h5>
                             </div>
                             <div class="shipping d-flex tw-flex-col">
-                                 <h5>Shipping : </h5>
-                                 <h6>to Morocco via Cainiao Super Economy Global <i class="fa fa-angle-down"></i> </h6>
-                                 <h6>Estimated Delivery: 30-50 days <i class="fa fa-question-circle-o"></i> </h6>
+                                <h5>Shipping : ${{shipping.price}} </h5>
+                                <a class="tw-flex tw-items-center" href="javascript:void(0)" @click='showShippingModal'>
+                                    to {{shipping.from.name}} via <img
+                                        :src="(shipping.carrier)?(shipping.carrier.picture.url):''"
+                                        class="tw-w-8 tw-mx-1"> {{shipping.carrier.name}}
+                                    <i class=" tw-ml-1 fa fa-angle-down"></i>
+                                </a>
+                                <h6>Estimated Delivery:
+                                    {{shipping.estimatedDeliveryMin}}-{{shipping.estimatedDeliveryMax}} days <i
+                                        class="fa fa-question-circle-o"></i> </h6>
+
+                                <shipping-modal v-if="isShowShoppingModal" :from='shipping.from.code'
+                                    :to='shipping.to.code' :countries='countries'
+                                    v-on:shippingSelected='shippingSelected' v-on:closeModal="hiddenShoppingModal">
+                                </shipping-modal>
+
                             </div>
                             <div class="total d-flex justify-content-between">
                                 <h5>Total</h5>
                                 <h5>${{total}}</h5>
                             </div>
                             <div class="checkout-btn">
-                                <a href="#" class="btn alazea-btn w-100">PROCEED TO CHECKOUT</a>
+                                <router-link  :to="{ path: '/checkout'}"
+                                    class="btn alazea-btn w-100">
+                                    PROCEED TO CHECKOUT
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -120,5 +138,6 @@
             </div>
         </div>
     </div>
+
 </template>
 <script lang="ts" src='./cart.page.ts'></script>

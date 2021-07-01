@@ -2,13 +2,8 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| ADMIN
 |--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
 */
 
 /**  Lgin */
@@ -148,6 +143,16 @@ $router->group(['prefix'=>'api/admin/shipping','middleware' => ['csrf','admin']]
     $router->delete('/{id}', 'Admin\ShippingController@destroy');
 });
 
+/*
+|--------------------------------------------------------------------------
+| UI
+|--------------------------------------------------------------------------
+*/
+
+/**  Countries */
+$router->group(['prefix'=>'api/countries','middleware' => ['csrf']], function() use($router){
+    $router->get('/', 'Ui\CountryController@index');
+});
 
 /**  Upload File */
 $router->group(['prefix'=>'upload-file','middleware' => ['csrf']], function() use($router){
@@ -158,12 +163,6 @@ $router->group(['prefix'=>'upload-file','middleware' => ['csrf']], function() us
 $router->group(['prefix'=>'api/categories','middleware' => ['csrf']], function() use($router){
     $router->get('/', 'Ui\CategoryController@index');
     $router->get('/products-total', 'Ui\CategoryController@listWithProductsTotal');
-    // $router->post('/', 'Ui\CategoryController@store');
-    // $router->get('/{id}', 'Ui\CategoryController@show');
-    // $router->get('/{id}/edit', 'Ui\CategoryController@edit');
-    // $router->put('/{id}', 'Ui\CategoryController@update');
-    // $router->delete('/{id}', 'Ui\CategoryController@destroy');
-
 });
 
 /**  Product */
@@ -173,6 +172,21 @@ $router->group(['prefix'=>'api/products','middleware' => ['csrf']], function() u
     $router->post('/fetchByIds', 'Ui\ProductController@fetchByIds');
     $router->get('/slug/{slug}', 'Ui\ProductController@findBySlug');
 });
+
+/**  Shipping */
+$router->group(['prefix'=>'api/shipping','middleware' => ['csrf']], function() use($router){
+    $router->get('/getShippingByZone/{from}/{to}', 'Ui\ShippingController@getShippingByZone');
+    $router->get('/getShippingsByZone/{from}/{to}', 'Ui\ShippingController@getShippingsByZone');
+    $router->get('/id/{id}', 'Ui\ShippingController@show');
+});
+
+/**  CHECKOUT */
+$router->group(['prefix'=>'api/checkout','middleware' => ['csrf']], function() use($router){
+    $router->get('/', 'Ui\CheckoutController@show');
+});
+
+
+
 
 
 $router->get('admin/{any:.+}/', function ()  {

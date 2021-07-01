@@ -336,15 +336,17 @@ module.exports = {
       full: '100%',
       ...breakpoints(theme('screens')),
     }),
-    minHeight: {
-      '0': '0',
+    minHeight: (theme, { negative }) => ({
       full: '100%',
       screen: '100vh',
-    },
-    minWidth: (theme, { negative }) => ({
       ...theme('spacing'),
       ...negative(theme('spacing')),
+    }),
+    minWidth: (theme, { negative }) => ({
       full: '100%',
+      screen: '100vh',
+      ...theme('spacing'),
+      ...negative(theme('spacing')),
     }),
     objectPosition: {
       bottom: 'bottom',

@@ -4,6 +4,7 @@ import {LocalStorageService } from '../../core/storage/localstorage.service';
 import { StateService } from '../../core/state/state.service';
 import { Cart , ICart } from '../../shared/models/cart.model'
 import { ICartItem , CartItem } from '../../shared/models/cart-item.model'
+import { IShipping, Shipping } from '../../shared/models/shipping.model'
 
 declare const _ : any ;
 
@@ -40,13 +41,12 @@ export class CartService {
       this.dispatch(newCart);
    }
 
-   // public setDeliveryOption(deliveryOption: DeliveryOption): void {
-   //    const cart = this.retrieve();
-   //    cart.deliveryOptionId = deliveryOption.id;
-   //    this.calculateCart(cart);
-   //    this.save(cart);
-   //    this.dispatch(cart);
-   // }
+   public setShipping(shippingId:number): void {
+      const cart = this.retrieve();
+      cart.shippingId = shippingId;
+      this.save(cart);
+     // this.dispatch(cart);
+   }
 
    // private calculateCart(cart: ShoppingCart): void {
    //    cart.itemsTotal = cart.items

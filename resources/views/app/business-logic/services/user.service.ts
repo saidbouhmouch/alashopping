@@ -13,6 +13,10 @@ export class UserService {
       this.httpService.resourceName = 'users';
    }
 
+   getCurrentUser(){
+     return this.httpService.get('/getcurrentuser');
+   }
+
    public getUser(userId?: any) {
       if (userId) {
          return this.httpService.find(userId);

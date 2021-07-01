@@ -10,7 +10,7 @@ export class ShippingService{
    }
 
    public getShipping(shippingId? : any) {
-      return this.httpService.find(shippingId);
+      return this.httpService.get('/id/'+shippingId);
    }
 
    public getShippings() {
@@ -28,5 +28,15 @@ export class ShippingService{
    public deleteShipping(shippingId) {
       return this.httpService.delete(shippingId);
    }
+
+   public getShippingByZone(shipping) {
+      return this.httpService.get(`/getShippingByZone/${shipping.from.code}/${shipping.to.code}`);
+   }
+
+   public getShippingsByZone(shipping) {
+      return this.httpService.get(`/getShippingsByZone/${shipping.from.code}/${shipping.to.code}`);
+   }
+
+   
 
 }
