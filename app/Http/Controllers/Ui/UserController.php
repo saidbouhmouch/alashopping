@@ -22,7 +22,7 @@ class UserController extends Controller
         $user = null;
        if(Auth::check()){
             $user = User::findOrFail(Auth::id());
-            $user->addresse = Addresse::with(['country'])->where('user_id',Auth::id())->where('type','shipping')->first();  //'shipping','billing'
+            $user->addresse = Addresse::with(['country'])->where('user_id',Auth::id())->where('type','billing')->first();  //'shipping','billing'
        }
 
         return (new Response(json_encode(["isConnected"=>($user)?true:false,"user"=>$user]), 200));

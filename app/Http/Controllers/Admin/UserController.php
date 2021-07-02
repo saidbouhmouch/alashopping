@@ -89,7 +89,7 @@ class UserController extends Controller
          $addresse->country_id  = $data->addresse->country->id;
          $addresse->city        = $data->addresse->city;
          $addresse->zipcode     = $data->addresse->zipcode;
-         $addresse->type        = (isset($data->addresse->type))? $data->addresse->type : 'shipping'; //  enum['shipping','billing']
+         $addresse->type        = (isset($data->addresse->type))? $data->addresse->type : 'billing'; //  enum['shipping','billing']
          $addresse->user_id     = $user->id;
          $addresse->save();
          
@@ -119,7 +119,7 @@ class UserController extends Controller
         $user     = User::findOrFail($id);
         $picture  = $user->image;
         $roles  = $user->roles;
-        $addresse = Addresse::with(['country'])->where('user_id',$id)->where('type','shipping')->first();  //'shipping','billing'
+        $addresse = Addresse::with(['country'])->where('user_id',$id)->where('type','billing')->first();  //'shipping','billing'
         $user     = $user->makeHidden(['addresse', 'image','roles']);
        return (new Response(json_encode(["success"=>true,"user"=>$user,'picture'=>$picture,'addresse'=>$addresse,'roles'=>$roles]), 200));
     }

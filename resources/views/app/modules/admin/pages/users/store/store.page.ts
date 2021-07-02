@@ -67,7 +67,7 @@ export default class UserAddPage extends Vue {
     save(event) {
         event.preventDefault();
         this.isLoading = true;
-        this.user.addresse.type = 'shipping';
+        this.user.addresse.type = 'billing';
 
         this.userService.addUser(this.user).then((resp) => {
             if (resp.data.success) {
