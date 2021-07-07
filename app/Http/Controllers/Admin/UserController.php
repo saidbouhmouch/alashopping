@@ -84,14 +84,17 @@ class UserController extends Controller
          *
         */
 
-         $addresse              = new Addresse();
-         $addresse->addresse    = $data->addresse->addresse;
-         $addresse->country_id  = $data->addresse->country->id;
-         $addresse->city        = $data->addresse->city;
-         $addresse->zipcode     = $data->addresse->zipcode;
-         $addresse->type        = (isset($data->addresse->type))? $data->addresse->type : 'billing'; //  enum['shipping','billing']
-         $addresse->user_id     = $user->id;
-         $addresse->save();
+        for ($i=0; $i < 2 ; $i++) { 
+            $addresse              = new Addresse();
+            $addresse->addresse    = $data->addresse->addresse;
+            $addresse->country_id  = $data->addresse->country->id;
+            $addresse->city        = $data->addresse->city;
+            $addresse->zipcode     = $data->addresse->zipcode;
+            $addresse->type        = ($i==0)? 'billing' : 'shipping'; //  enum['shipping','billing']
+            $addresse->user_id     = $user->id;
+            $addresse->save();
+        }
+
          
 
         DB::commit();

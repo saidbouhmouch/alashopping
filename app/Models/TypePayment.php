@@ -22,6 +22,10 @@ class TypePayment extends Model
     public function image(){
         return $this->belongsTo('App\Models\Storage','image_id');
     } 
+
+    public function orders(){
+        return $this->hasMany('App\Models\Order','type_payment_id');
+    }
 }
 
 

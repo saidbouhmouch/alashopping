@@ -42,7 +42,8 @@ export class AuthenticationService {
         return null;
   }
 
-  setCredentials(token: any){
+  setCredentials(token?: any){
+    if(token){
       const _token = this.jwtService.decrypt(token);
       const credentials: ICredentials = {
         username: _token.email,
@@ -50,6 +51,9 @@ export class AuthenticationService {
         remember: _token.remember
       }
       this.credentialsService.setCredentials(credentials);
+    }else{
+      this.credentialsService.setCredentials();
+    }
   }
 
   destroyToken() {

@@ -186,6 +186,17 @@ $router->group(['prefix'=>'api/checkout','middleware' => ['csrf']], function() u
 });
 
 
+/**  User */
+$router->group(['prefix'=>'api/users','middleware' => ['csrf']], function() use($router){
+    $router->get('/getcurrentuser', 'Ui\UserController@getCurrentUser');
+});
+
+/**  Checkout */
+$router->group(['prefix'=>'api/checkout','middleware' => ['csrf']], function() use($router){
+    $router->post('/place-order', 'Ui\CheckoutController@placeOrder');
+});
+
+
 
 
 

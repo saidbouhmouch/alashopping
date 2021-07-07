@@ -39,4 +39,10 @@ class Shipping extends Model
     public function currency() {
         return $this->belongsTo('App\Models\Currency', 'currency_id');
     }
+
+    public function orders(){
+        return $this->hasMany('App\Models\Order','shipping_id');
+    }
+
+    
 }

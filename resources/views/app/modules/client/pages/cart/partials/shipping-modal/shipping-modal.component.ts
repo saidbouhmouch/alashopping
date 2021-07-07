@@ -18,15 +18,14 @@ declare const $: any;
 
 export default class CartComponent extends Vue {
 
-  @Prop() from!: string;
-  @Prop() to!: string;
+  @Prop() shipping!: IShipping;
   @Prop() countries!: ICountry[];
   country : ICountry = new Country() ;
   isLoading: boolean = true;
   logger: any = new Logger();
   shippingService: any = new ShippingService();
   shippings: IShipping[] = [];
-  shipping: IShipping = new Shipping();
+  //shipping: IShipping = new Shipping();
   shippingSelected: IShipping = new Shipping();
 
   constructor() {
@@ -35,7 +34,7 @@ export default class CartComponent extends Vue {
 
   getShippings() {
     this.isLoading = false;
-    this.shippingService.getShippingsByZone(this.shipping).then((response) => {
+    this.shippingService.getShippingsByZone(this.shippingSelected).then((response) => {
       this.shippings = [];
       _.forEach(response.data.shippings, (shipping) => {
         this.shippings.push(new Shipping(shipping));
@@ -50,9 +49,8 @@ export default class CartComponent extends Vue {
   }
 
   onSelectedCountry(country) {
-    this.shipping.to.code = country.code;
+    this.shippingSelected.to.code = country.code;
     this.country = _.find(this.countries, (c : ICountry)=>{ return c.code == country.code  });
-    this.shippingSelected = new Shipping();
     this.getShippings();
   }
 
@@ -65,6 +63,7 @@ export default class CartComponent extends Vue {
   }
 
   apply() {
+    console.log(this.shippingSelected);
     if (this.shippingSelected.to.code != '' && this.shippingSelected.id > 0) {
       this.$emit('shippingSelected', this.shippingSelected);
       this.$emit('closeModal', true);
@@ -73,9 +72,10 @@ export default class CartComponent extends Vue {
   }
 
   created() {
-    this.country = _.find(this.countries, (c : ICountry)=>{ return c.code == this.from  });
-    this.shipping.from.code = this.from;
-    this.shipping.to.code = this.to;
+    this.shippingSelected.from.code = this.shipping.from.code;
+    this.shippingSelected.to.code = this.shipping.to.code;
+    this.shippingSelected.id = this.shipping.id;
+    this.country = _.find(this.countries, (c : ICountry)=>{ return c.code == this.shipping.from.code  });
     this.getShippings();
   }
 

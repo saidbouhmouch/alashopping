@@ -61,7 +61,7 @@ export class SpecificPrice {
                 
                 if(this.discountType == 'amount'){
                         this.reducedPrice = this.reduction;
-                        this.percentReduction =(this.price)? (this.price / this.reduction) : 0;
+                        this.percentReduction =(this.price)? ( (this.reduction * 100) / this.price) : 0;
                         
                 }else if(this.discountType == 'percent'){
                         this.reducedPrice =(this.price)? (this.price * ( this.reduction/ 100 )):0;

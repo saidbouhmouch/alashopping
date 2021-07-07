@@ -38,8 +38,8 @@ export class Shipping {
                 this.to = shipping && new Country(shipping.delivery_to || shipping.to) || new Country();
                 this.price = shipping && shipping.price || 0;
                 this.currency = shipping && new Currency(shipping.currency) || new Currency();
-                this.estimatedDeliveryMin = shipping && shipping.estimatedDeliveryMin || 1;
-                this.estimatedDeliveryMax = shipping && shipping.estimatedDeliveryMax || 1;
+                this.estimatedDeliveryMin = shipping && ( shipping.estimated_delivery_min ||shipping.estimatedDeliveryMin) || 1;
+                this.estimatedDeliveryMax = shipping && ( shipping.estimated_delivery_max || shipping.estimatedDeliveryMax) || 1;
                 this.carrier = shipping && new Carrier(shipping.carrier) || new Carrier();
                 this.createdAt = shipping && (shipping.createdAt || shipping.created_at) || '';
                 this.updatedAt = shipping && (shipping.updatedAt || shipping.updated_at) || '';

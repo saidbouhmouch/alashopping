@@ -71,4 +71,9 @@ class Product extends Model {
         return $this->hasMany('App\Models\SpecificPrice', 'product_id');
     }
 
+    public function orders(){
+        return $this->belongsToMany('App\Models\Order', 'order_product','product_id','order_id')->withPivot('price', 'quantity','is_discount','reduction','total')->withTimestamps();
+        
+    }
+
 }

@@ -7,10 +7,10 @@
             <img src="/img/core-img/leaf.png" alt="">
         </div>
     </div>
-    <notifications group="alashopping" />
    <header-component></header-component>
     <router-view/>
     <footer-component></footer-component>
+    <alert-component :data='notifyData' v-if="isShowAlert" v-on:closeModal='toggleAlert' ></alert-component>
   </div>
 </template>
 <script lang="ts" src='./master.component.ts'></script>

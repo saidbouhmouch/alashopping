@@ -30,4 +30,8 @@ class Currency extends Model
         return $this->hasMany('App\Models\SpecificPrice', 'currency_id');
     }
 
+    public function orders(){
+        return $this->hasMany('App\Models\Order','currency_id');
+    }
+
 }

@@ -1,11 +1,11 @@
 import { HttpService } from '../../core'
-import { CredentialsService, JwtService } from '../../core';
+//import { CredentialsService, JwtService } from '../../core';
 import {LocalStorageService } from '../../core/storage/localstorage.service';
 import { StateService } from '../../core/state/state.service';
-import { Cart , ICart } from '../../shared/models/cart.model'
-import { ICartItem , CartItem } from '../../shared/models/cart-item.model'
-import { IShipping, Shipping } from '../../shared/models/shipping.model'
-
+import { Cart } from '../../shared/models/cart.model'
+import { CartItem } from '../../shared/models/cart-item.model'
+//import { IShipping, Shipping } from '../../shared/models/shipping.model'
+import { NotifyEnum} from '../../core/enum/notify.enum'; 
 declare const _ : any ;
 
 export class CartService {
@@ -73,10 +73,12 @@ export class CartService {
 
    private dispatch(cart): void {
       StateService.$emit('cart', cart);
+      //tittle : string , msg : string ,type:NotifyEnum , time : number 
       StateService.$emit('notify', {
-         title : 'The product is added to your cart',
-         text : '',
-         type:"success"
+         title : 'Information',
+         msg : 'The product is added to your cart',
+         type:NotifyEnum.info,
+         time : -1
       });
    }
 

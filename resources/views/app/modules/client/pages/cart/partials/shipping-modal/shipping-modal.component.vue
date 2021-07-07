@@ -63,26 +63,26 @@
                             </tr>
                           </thead>
                           <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
-                            <tr v-for="(shipping,index) in shippings" :key='index'>
+                            <tr v-for="(item,index) in shippings" :key='index'>
                               <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap">
-                                <input type="radio" name="shipping" id="" @change="onSelectedShipping(shipping)">
+                                <input type="radio" name="shipping" id="" :checked="shippingSelected.id==item.id" @change="onSelectedShipping(item)">
                               </td>
                               <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap">
                                 <div class="tw-text-sm tw-text-gray-900">
-                                  {{shipping.estimatedDeliveryMin}}-{{shipping.estimatedDeliveryMax}} days
+                                  {{item.estimatedDeliveryMin}}-{{item.estimatedDeliveryMax}} days
                                 </div>
                               </td>
                               <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap">
                                 <span
                                   class="tw-px-2 tw-inline-flex tw-text-xs tw-leading-5 tw-font-semibold tw-rounded-full tw-bg-green-100 ">
-                                  ${{shipping.price}}
+                                  ${{item.price}}
                                 </span>
                               </td>
                               <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
                                 <div class="tw-flex tw-items-center tw-justify-items-center">
-                                  <img :src="(shipping.carrier)?(shipping.carrier.picture.url):''"
+                                  <img :src="(item.carrier)?(item.carrier.picture.url):''"
                                     class="tw-w-8 tw-mx-1">
-                                  {{shipping.carrier.name}}
+                                  {{item.carrier.name}}
                                 </div>
                               </td>
                             </tr>

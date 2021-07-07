@@ -51,7 +51,8 @@ export default class LoginPage extends Vue {
     }
 
     created() {
-        this.localStorageService.clear();
+        this.authService.setCredentials();
+        //this.localStorageService.clear();
     }
 
     mounted() {

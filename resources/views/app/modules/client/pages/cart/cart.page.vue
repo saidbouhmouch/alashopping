@@ -116,8 +116,7 @@
                                     {{shipping.estimatedDeliveryMin}}-{{shipping.estimatedDeliveryMax}} days <i
                                         class="fa fa-question-circle-o"></i> </h6>
 
-                                <shipping-modal v-if="isShowShoppingModal" :from='shipping.from.code'
-                                    :to='shipping.to.code' :countries='countries'
+                                <shipping-modal v-if="isShowShoppingModal" :shipping='shipping' :countries='countries'
                                     v-on:shippingSelected='shippingSelected' v-on:closeModal="hiddenShoppingModal">
                                 </shipping-modal>
 
