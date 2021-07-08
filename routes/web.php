@@ -196,6 +196,14 @@ $router->group(['prefix'=>'api/checkout','middleware' => ['csrf']], function() u
     $router->post('/place-order', 'Ui\CheckoutController@placeOrder');
 });
 
+/**  Payment */
+$router->group(['prefix'=>'api/payment','middleware' => ['csrf']], function() use($router){
+    $router->post('/{orderId}', 'Ui\PaymentController@payWithpaypal');
+    $router->get('/status', 'Ui\PaymentController@getPaymentStatus');
+});
+
+
+
 
 
 

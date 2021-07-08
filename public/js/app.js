@@ -17069,12 +17069,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
                 {
                     path: '/checkout',
                     name: 'checkout',
-                    component: function () { return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(4), __webpack_require__.e(5), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! ./pages/checkout/checkout.page.vue */ "./resources/views/app/modules/client/pages/checkout/checkout.page.vue")); }
+                    component: function () { return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(3), __webpack_require__.e(4), __webpack_require__.e(5), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ./pages/checkout/checkout.page.vue */ "./resources/views/app/modules/client/pages/checkout/checkout.page.vue")); }
                 },
                 {
                     path: '/contact',
                     name: 'contact',
-                    component: function () { return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./pages/contact/contact.page.vue */ "./resources/views/app/modules/client/pages/contact/contact.page.vue")); }
+                    component: function () { return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./pages/contact/contact.page.vue */ "./resources/views/app/modules/client/pages/contact/contact.page.vue")); }
                 }
             ]
         }

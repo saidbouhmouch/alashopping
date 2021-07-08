@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ui;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Addresse;
@@ -25,6 +26,7 @@ class CheckoutController extends Controller
      */
 
     public function placeOrder(Request $request){
+
         $data =json_decode($request->data);
 
         DB::beginTransaction();
@@ -33,7 +35,7 @@ class CheckoutController extends Controller
         $shipping = Shipping::findOrFail($data->shippingId);
         $order = new Order();
         $order->user_id = $user->id;
-        $order->order_status_id = OrderStatus::where('slug','pending')->firstOrFail()->id ;
+        $order->order_status_id = OrderStatus::where('slug','waiting_payment')->firstOrFail()->id ;
         $order->shipping_id = $shipping->id;
         $order->billing_address_id = Addresse::where('user_id',$user->id)->where('type','billing')->firstOrFail()->id;
         $order->shipping_address_id = Addresse::where('user_id',$user->id)->where('type','shipping')->firstOrFail()->id;
@@ -48,10 +50,10 @@ class CheckoutController extends Controller
         // $total =  $this->addProduct(json_decode(json_encode($data->products), true));
 
         // add product
-
-        $productIds = $names = array_map(
+        //dd($data->products);
+        $productIds = array_map(
                         function($prd) { return $prd['productId']; },
-                        json_decode(json_encode($data->products))
+                        json_decode(json_encode($data->products),true)
                         );
     
         $products = Product::with(['specificPrices'=> function ($query){
@@ -70,7 +72,7 @@ class CheckoutController extends Controller
             $discount=0;
             $isDiscount=false;
 
-            $item = $this->find(json_decode(json_encode($data->products)),'productId',$product->id);
+            $item = $this->find(json_decode(json_encode($data->products),true),'productId',$product->id);
             if($item){
                 if($specificPrice){
                         if($specificPrice->discount_type == 'amount'){

@@ -80079,7 +80079,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
                         {
                             path: "/admin/specific-prices/:id/edit",
                             name: "specificPriceUpdate",
-                            component: function () { return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ./pages/specific-prices/update/update.page.vue */ "./resources/views/app/modules/admin/pages/specific-prices/update/update.page.vue")); }
+                            component: function () { return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(18)]).then(__webpack_require__.bind(null, /*! ./pages/specific-prices/update/update.page.vue */ "./resources/views/app/modules/admin/pages/specific-prices/update/update.page.vue")); }
                         }
                     ]
                 },

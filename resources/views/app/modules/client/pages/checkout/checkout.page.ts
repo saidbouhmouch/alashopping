@@ -5,6 +5,7 @@ import { IUser, User } from '../../../../shared/models/user.model'
 import { ProductService } from '../../../../business-logic/services/product.service';
 import { CartService } from '../../../../business-logic/services/cart.service'
 import { CheckoutService } from '../../../../business-logic/services/checkout.service'
+import { PaymentService } from '../../../../business-logic/services/payment.service'
 import { ShippingService } from '../../../../business-logic/services/shipping.service'
 import { CountryService } from '../../../../business-logic/services/country.service'
 import { Logger } from "../../../../core/logger/logger.service"
@@ -32,6 +33,7 @@ declare const _: any;
 export default class CheckoutComponent extends Vue {
 
   checkoutService: any = new CheckoutService();
+  paymentService : any = new PaymentService();
   cartService: any = new CartService();
   logger: any = new Logger();
 
@@ -186,7 +188,16 @@ export default class CheckoutComponent extends Vue {
       comment : this.comment
     };
 
+    /*
     this.checkoutService.placeOrder(order).then((resp) => {
+      console.log(resp.data);
+      setTimeout(()=>{this.isLoadingPlaceOrder = true;},3000);
+    }).catch((error) => {
+      this.isLoadingPlaceOrder = true;
+      this.logger.error(error);
+    })
+    */
+    this.paymentService.payWithpaypal(2).then((resp) => {
       console.log(resp.data);
       setTimeout(()=>{this.isLoadingPlaceOrder = true;},3000);
     }).catch((error) => {
