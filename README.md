@@ -1,4 +1,6 @@
 #  custom ecommerce on Lumen and VueJs  .
+## Notice !
+- Project Under Development 
 ## What's new?
 - Clients Management (including addresses and companies)
 - Specific Prices for products
